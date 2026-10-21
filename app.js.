@@ -1,0 +1,90 @@
+
+/* MICHAEL TRADING AI
+   Funciones educativas del sitio
+*/
+
+async function loadPrices() {
+  const status = document.getElementById("status");
+
+  if (!status) return;
+
+  status.textContent = "Consultando precios…";
+
+  try {
+    const url =
+      "https://api.binance.com/api/v3/ticker/price?symbols=%5B%22BTCUSDT%22,%22SOLUSDT%22,%22ETHUSDT%22%5D";
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("No se pudieron consultar los precios");
+    }
+
+    const data = await response.json();
+
+    data.forEach(item => {
+      const symbol = item.symbol.replace("USDT", "");
+      const element = document.getElementById(symbol);
+
+      if (element) {
+        element.textContent =
+          Number(item.price).toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD"
+          });
+      }
+    });
+
+    status.textContent = "Precios recibidos. Pueden tener retraso.";
+  } catch (error) {
+    status.textContent =
+      "No se pudieron cargar los precios. Intenta actualizar.";
+  }
+}
+
+function teach() {
+  const lessons = {
+    velas:
+      "Las velas japonesas muestran apertura, cierre, máximo y mínimo de un periodo. Su forma debe analizarse junto con la tendencia y el contexto.",
+    rsi:
+      "El RSI mide el impulso entre 0 y 100. Los niveles 70 y 30 son referencias comunes, no señales automáticas de compra o venta.",
+    ema:
+      "La EMA da más peso a los precios recientes y puede ayudar a estudiar tendencias. También puede producir señales falsas.",
+    bollinger:
+      "Las bandas de Bollinger muestran una media y bandas relacionadas con la volatilidad. Tocar una banda no garantiza una reversión.",
+    riesgo:
+      "Antes de operar, define cuánto puedes perder. Considera el stop, las comisiones y el tamaño de posición."
+  };
+
+  const selector = document.getElementById("lesson");
+  const output = document.getElementById("lessonText");
+
+  if (selector && output) {
+    output.textContent = lessons[selector.value] ||
+      "Selecciona una lección para comenzar.";
+  }
+}
+
+function calculateRisk() {
+  const balance = Number(document.getElementById("balance")?.value);
+  const risk = Number(document.getElementById("risk")?.value);
+  const output = document.getElementById("riskResult");
+
+  if (!output) return;
+
+  if (
+    !Number.isFinite(balance) || balance <= 0 ||
+    !Number.isFinite(risk) || risk <= 0 || risk > 100
+  ) {
+    output.textContent =
+      "Introduce un capital positivo y un riesgo mayor que 0 y hasta 100%.";
+    return;
+  }
+
+  output.textContent =
+    "Riesgo teórico: " +
+    (balance * risk / 100).toFixed(2) +
+    " USDT. Las pérdidas reales pueden ser mayores.";
+}
+
+document.addEventListener("DOMContentLoaded", loadPrices);
