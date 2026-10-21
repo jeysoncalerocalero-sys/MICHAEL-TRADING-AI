@@ -1,0 +1,100 @@
+
+/* MICHAEL TRADING AI — Diseño negro y dorado */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #080a10;
+  color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  text-align: center;
+  padding: 30px 16px;
+  background: #10131c;
+  border-bottom: 1px solid #b99346;
+}
+
+.logo {
+  width: 115px;
+  height: 115px;
+  margin: 0 auto 14px;
+  border: 2px solid #d6ae58;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 42px;
+  color: #e5bd65;
+  background: #080a10;
+}
+
+h1, h2 {
+  color: #e5bd65;
+}
+
+main {
+  max-width: 850px;
+  margin: auto;
+  padding: 20px 15px;
+}
+
+.card {
+  background: #111622;
+  border: 1px solid #292f3c;
+  border-radius: 14px;
+  padding: 18px;
+  margin: 16px 0;
+}
+
+.coins {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  gap: 10px;
+}
+
+.coin {
+  background: #090d15;
+  border: 1px solid #303746;
+  padding: 14px;
+  border-radius: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: #d5ad59;
+  color: #111;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 13px;
+  color: white;
+  background: #080c14;
+  border: 1px solid #41495a;
+  border-radius: 8px;
+}
+
+label {
+  display: block;
+  margin: 14px 0 7px;
+}
+
+.muted, .notice {
+  color: #b9bdc8;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #9da4b3;
+  font-size: 12px;
+}
